@@ -1,30 +1,26 @@
 package com.feritkeskin.pixabayjetpack.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.get
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.feritkeskin.pixabayjetpack.R
-import com.feritkeskin.pixabayjetpack.viewmodel.PixabayViewModel
+import com.feritkeskin.pixabayjetpack.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private var model = PixabayViewModel()
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        model = ViewModelProvider(this).get(PixabayViewModel::class.java)
-        model.getData("Mona")
-        observers()
-    }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-    private fun observers() {
-        model.image.observe(this) { model ->
-            model.hits.forEach {  hit ->
-                println("Hello this is pixabay: ${hit.tags}")
-            }
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+        val navController = navHostFragment?.findNavController()
+        navController?.let {
+            binding.bottomNavigationView.setupWithNavController(navController)
         }
     }
 }

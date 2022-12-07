@@ -10,7 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class PixabayViewModel: ViewModel() {
+class PixabayViewModel : ViewModel() {
 
     private val pixabayAPIService = PixabayAPIService()
     private var disposable = CompositeDisposable()
@@ -23,7 +23,7 @@ class PixabayViewModel: ViewModel() {
             pixabayAPIService.getData(search)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object: DisposableSingleObserver<Model>() {
+                .subscribeWith(object : DisposableSingleObserver<Model>() {
                     override fun onSuccess(t: Model) {
                         _image.value = t
                     }
