@@ -32,7 +32,6 @@ class HomeAdapter(
 
     override fun onBindViewHolder(holder: HomeAdapterViewHolder, position: Int) {
         val list = rowList[position]
-        println("HomeAdapter Hello observers in data: ${list.user}")
         Glide.with(holder.itemView.context).load(list.previewURL).into(holder.image)
         holder.user.text = list.user
     }

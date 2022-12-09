@@ -31,9 +31,7 @@ class PixabayViewModel : ViewModel() {
                     override fun onError(e: Throwable) {
                         println("Error ${e.message}")
                     }
-
                 })
         )
     }
-
 }
