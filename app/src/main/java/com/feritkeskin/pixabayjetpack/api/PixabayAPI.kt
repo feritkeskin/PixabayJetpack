@@ -14,6 +14,6 @@ interface PixabayAPI {
     fun imageSearch(
         @Query("q") search: String,
         @Query("key") key: String = API_KEY
-    ) : Single<Model>
+    ): Single<Model>
 
 }

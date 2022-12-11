@@ -27,5 +27,11 @@
         android:id="@+id/detailFragment"
         android:name="com.feritkeskin.pixabayjetpack.view.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="hit"
+            android:defaultValue="@null"
+            app:argType="com.feritkeskin.pixabayjetpack.model.Hit"
+            app:nullable="true" />
+    </fragment>
 </navigation>

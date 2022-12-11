@@ -2,14 +2,12 @@ package com.feritkeskin.pixabayjetpack.view
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.feritkeskin.pixabayjetpack.R
 import com.feritkeskin.pixabayjetpack.databinding.ActivityMainBinding
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         binding.toolBar.setNavigationIcon(R.drawable.ic_back_black)
         binding.toolBar.title = "Detail Screen"
         binding.toolBar.setNavigationOnClickListener {
-            Toast.makeText(this, "Click item", Toast.LENGTH_SHORT).show()
             navController?.popBackStack()
         }
     }

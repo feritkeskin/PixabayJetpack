@@ -1,8 +1,10 @@
 package com.feritkeskin.pixabayjetpack.model
 
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Hit(
     @SerializedName("collections")
     val collections: Int,
@@ -48,4 +50,4 @@ data class Hit(
     val webformatURL: String,
     @SerializedName("webformatWidth")
     val webformatWidth: Int
-)
+) : Parcelable

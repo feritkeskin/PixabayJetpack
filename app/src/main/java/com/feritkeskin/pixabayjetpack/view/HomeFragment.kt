@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
-        //model.getData("")
+        model.getData("")
         observers()
         listener()
         return binding.root
@@ -89,7 +89,7 @@ class HomeFragment : Fragment() {
             shimmerStop()
         }
         val homeAdapter = HomeAdapter(histArrayList) { hit ->
-            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
+            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(hit)
             view?.findNavController()?.navigate(action)
         }
         binding.recyclerViewHome.adapter = homeAdapter

@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.feritkeskin.pixabayjetpack.R
 import com.feritkeskin.pixabayjetpack.model.Hit
+import com.feritkeskin.pixabayjetpack.util.loadUrl
 
 class HomeAdapter(
     private val rowList: ArrayList<Hit>,
@@ -33,7 +33,7 @@ class HomeAdapter(
 
     override fun onBindViewHolder(holder: HomeAdapterViewHolder, position: Int) {
         val list = rowList[position]
-        Glide.with(holder.itemView.context).load(list.previewURL).into(holder.image)
+        holder.image.loadUrl(list.previewURL)
         holder.user.text = list.user
         holder.itemView.setOnClickListener {
             clickHitItem.invoke(list)
@@ -43,5 +43,4 @@ class HomeAdapter(
     override fun getItemCount(): Int {
         return rowList.size
     }
-
 }

@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
 }
+apply plugin: "kotlin-parcelize"
 
 android {
     namespace 'com.feritkeskin.pixabayjetpack'
