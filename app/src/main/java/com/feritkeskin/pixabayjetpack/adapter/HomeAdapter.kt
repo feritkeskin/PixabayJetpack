@@ -11,7 +11,8 @@ import com.feritkeskin.pixabayjetpack.R
 import com.feritkeskin.pixabayjetpack.model.Hit
 
 class HomeAdapter(
-    private val rowList: ArrayList<Hit>
+    private val rowList: ArrayList<Hit>,
+    private val clickHitItem: (Hit) -> Unit
 ) : RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>() {
 
     class HomeAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -34,6 +35,9 @@ class HomeAdapter(
         val list = rowList[position]
         Glide.with(holder.itemView.context).load(list.previewURL).into(holder.image)
         holder.user.text = list.user
+        holder.itemView.setOnClickListener {
+            clickHitItem.invoke(list)
+        }
     }
 
     override fun getItemCount(): Int {

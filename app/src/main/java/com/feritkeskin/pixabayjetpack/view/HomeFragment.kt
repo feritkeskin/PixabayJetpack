@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.feritkeskin.pixabayjetpack.adapter.HomeAdapter
 import com.feritkeskin.pixabayjetpack.databinding.FragmentHomeBinding
@@ -33,7 +34,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
-        model.getData("")
+        //model.getData("")
         observers()
         listener()
         return binding.root
@@ -45,7 +46,7 @@ class HomeFragment : Fragment() {
             //ANR -> Android Not Response
             job?.cancel()
             job = lifecycleScope.launch {
-                binding.pbHome.visibility = View.VISIBLE
+                shimmerStart()
                 binding.recyclerViewHome.visibility = View.GONE
                 delay(1000)
                 editable?.let {
@@ -55,11 +56,21 @@ class HomeFragment : Fragment() {
                         model.getData("")
                     }
                     observers()
-                    binding.pbHome.visibility = View.GONE
+                    shimmerStop()
                     binding.recyclerViewHome.visibility = View.VISIBLE
                 }
             }
         }
+    }
+
+    private fun shimmerStart() {
+        binding.shimmerViewContainer.startShimmerAnimation()
+        binding.shimmerViewContainer.visibility = View.VISIBLE
+    }
+
+    private fun shimmerStop() {
+        binding.shimmerViewContainer.stopShimmerAnimation()
+        binding.shimmerViewContainer.visibility = View.GONE
     }
 
     private fun observers() {
@@ -74,7 +85,23 @@ class HomeFragment : Fragment() {
 
     private fun init() {
         binding.recyclerViewHome.layoutManager = GridLayoutManager(context, 2)
-        val homeAdapter = HomeAdapter(histArrayList)
+        if (histArrayList.size > 0) {
+            shimmerStop()
+        }
+        val homeAdapter = HomeAdapter(histArrayList) { hit ->
+            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
+            view?.findNavController()?.navigate(action)
+        }
         binding.recyclerViewHome.adapter = homeAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.shimmerViewContainer.startShimmerAnimation()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.shimmerViewContainer.stopShimmerAnimation()
     }
 }
