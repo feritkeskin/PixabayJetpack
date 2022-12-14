@@ -34,10 +34,14 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
         model.getData("")
         observers()
         listener()
-        return binding.root
     }
 
     private fun listener() {
